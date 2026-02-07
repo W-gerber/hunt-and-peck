@@ -14,10 +14,10 @@ The original Hunt-and-Peck application provides Vim-style keyboard navigation fo
 
 ![Explorer Screenshot](assets/explorer.png)
 
-## 🔧KEY ENHANCEMENTS
+## 📌 KEY ENHANCEMENTS
 <details>
   
-<summary> click to expand </summary>
+<summary><strong>click to expand</strong></summary>
 
 ### 🔧 Performance Optimization
 
@@ -80,7 +80,7 @@ The Options window has been resized and reorganized to support these additions w
 
 </details>
 
-## 📌 Usage
+## ▶️ Usage
 
 Launch the executable and trigger hints using the configured hotkeys.  
 
