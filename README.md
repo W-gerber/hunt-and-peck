@@ -1,41 +1,96 @@
-# hunt-n-peck
-[![Build status](https://ci.appveyor.com/api/projects/status/jet85wsdqn10grhk/branch/master?svg=true)](https://ci.appveyor.com/project/zsims/hunt-and-peck/branch/master)
+# ⚡ Hunt-and-Peck Enhanced
 
-Simple vimium/vimperator style navigation for Windows applications based on the UI Automation framework. In essence, it works the same as screen readers or accessibility programs but with the goal of making any Windows program faster to use.
+Hunt-and-Peck Enhanced is a performance-oriented fork of the original Hunt-and-Peck project, focused on improving responsiveness, expanding configurability, and modernizing the user interface while preserving the lightweight, accessibility-driven navigation model.  
 
-It works for any Windows program (excluding Modern UI apps :))
+This work builds directly on the original project created by Zach Sims. Full credit belongs to the original author for the concept and foundation.  
 
-NOTE: hunt-n-peck is sporadically maintained, please consider one of the various forks.
+**Original Repository:**  
+👉 https://github.com/zsims/hunt-and-peck  
 
-# Download
 
-https://github.com/zsims/hunt-and-peck/releases/download/release%2F1.7/HuntAndPeck-1.7.zip
+## Overview
 
-# How to change font size
+The original Hunt-and-Peck application provides Vim-style keyboard navigation for Windows applications using the UI Automation framework. This fork extends that capability with architectural improvements, faster hint generation, configurable controls, and a refined visual presentation suitable for modern workflows.
 
-Find the application icon in tray, click right mouse button, select `Options`, then use the `FontSize` menu to change the font size.
 
-# Screenshots
+## Key Enhancements
 
-![ScreenShot](https://raw.github.com/zsims/hunt-n-peck/master/screenshots/explorer.png)
-![ScreenShot](https://raw.github.com/zsims/hunt-n-peck/master/screenshots/visual-studio.png)
 
-## To use
+### Performance Optimization
 
-1. Launch the executable.
-2. With any window focused, press `Alt + ;`
-    - The tray can be highlighted with `Ctrl + ;`
-3. An overlay window will be displayed, type any of the hint characters you see.
+- Implemented a concurrent caching system to store UI elements per window, reducing repeated enumeration.  
+- Added cache validation to ensure associated windows and processes remain active.  
+- Introduced automatic cleanup of stale cache entries.  
+- Enabled parallel hint generation to improve responsiveness in complex interfaces.  
+- Strengthened error handling to safely manage UI elements that are destroyed during enumeration.  
 
-Alternatively, Hunt and Peck can be launched via the command-line or AutoHotKey by specifying `/hint`:
-```
+**Outcome:** Faster overlay rendering and more reliable hint activation.
+
+
+### Improved Hint Matching
+
+- Replaced linear searches with O(1) dictionary-based lookup for constant-time prefix matching.  
+- Enabled case-insensitive comparisons for more forgiving input.  
+- Added automatic state reset when no matches are detected.  
+
+**Outcome:** Immediate and predictable hint execution.
+
+
+### Configurable Hotkeys
+
+Hotkeys are now fully configurable rather than hardcoded.  
+
+Users can define:
+
+- Main overlay shortcut  
+- Taskbar shortcut  
+- Modifier keys (Alt, Control, Shift)  
+
+Settings are loaded dynamically and persist automatically.
+
+
+### Expanded Appearance and Settings System
+
+A redesigned configuration infrastructure allows comprehensive personalization without code changes.  
+
+**Configurable options include:**
+
+- Font family and size  
+- Active and inactive background colors  
+- Text color  
+- Gradient-based hint styling  
+- Refined borders and improved text clarity  
+
+The Options window has been resized and reorganized to support these additions with a clearer layout.
+
+
+### Architectural Improvements
+
+- Expanded settings model with automatic persistence.  
+- Two-way bound view models to ensure synchronization between UI and configuration.  
+- Added Win32 validation methods to confirm window handle integrity.  
+- Refactored components for improved maintainability and long-term extensibility.  
+
+
+## Usage
+
+Launch the executable and trigger hints using the configured hotkeys.  
+
+
+### Command-line options:
+
+```bash
 hap.exe /hint
-```
-
-Or in tray mode with
-```
 hap.exe /tray
 ```
 
-# Supported Elements
-Only UI Automation elements with "Invoke" patterns are supported (and displayed).
+The application supports UI Automation elements that implement the Invoke pattern.
+
+
+## 🙌 Credit
+
+Full credit to Zach Sims for creating Hunt-and-Peck and the powerful idea behind it.  
+
+This fork exists to extend, modernize, and optimize his work while preserving its lightweight philosophy.  
+
+👉 https://github.com/zsims/hunt-and-peck
