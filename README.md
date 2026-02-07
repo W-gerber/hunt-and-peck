@@ -12,7 +12,7 @@ This work builds directly on the original project created by Zach Sims. Full cre
 
 The original Hunt-and-Peck application provides Vim-style keyboard navigation for Windows applications using the UI Automation framework. This fork extends that capability with architectural improvements, faster hint generation, configurable controls, and a refined visual presentation suitable for modern workflows.
 
-
+![Explorer Screenshot](assets/explorer.png)
 
 
 ## Key Enhancements
