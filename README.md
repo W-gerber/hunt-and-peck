@@ -13,10 +13,12 @@ This work builds directly on the original project created by Zach Sims. Full cre
 The original Hunt-and-Peck application provides Vim-style keyboard navigation for Windows applications using the UI Automation framework. This fork extends that capability with architectural improvements, faster hint generation, configurable controls, and a refined visual presentation suitable for modern workflows.
 
 
+
+
 ## Key Enhancements
 
 
-### Performance Optimization
+### 🔧 Performance Optimization
 
 - Implemented a concurrent caching system to store UI elements per window, reducing repeated enumeration.  
 - Added cache validation to ensure associated windows and processes remain active.  
@@ -27,7 +29,7 @@ The original Hunt-and-Peck application provides Vim-style keyboard navigation fo
 **Outcome:** Faster overlay rendering and more reliable hint activation.
 
 
-### Improved Hint Matching
+### 🔎 Improved Hint Matching 
 
 - Replaced linear searches with O(1) dictionary-based lookup for constant-time prefix matching.  
 - Enabled case-insensitive comparisons for more forgiving input.  
@@ -36,7 +38,7 @@ The original Hunt-and-Peck application provides Vim-style keyboard navigation fo
 **Outcome:** Immediate and predictable hint execution.
 
 
-### Configurable Hotkeys
+### 🔑 Configurable Hotkeys
 
 Hotkeys are now fully configurable rather than hardcoded.  
 
@@ -49,11 +51,11 @@ Users can define:
 Settings are loaded dynamically and persist automatically.
 
 
-### Expanded Appearance and Settings System
+### ⚙️ Expanded Appearance and Settings System
 
 A redesigned configuration infrastructure allows comprehensive personalization without code changes.  
 
-**Configurable options include:**
+**⚙️ Configurable options include:**
 
 - Font family and size  
 - Active and inactive background colors  
@@ -64,7 +66,7 @@ A redesigned configuration infrastructure allows comprehensive personalization w
 The Options window has been resized and reorganized to support these additions with a clearer layout.
 
 
-### Architectural Improvements
+### ⚙️ Architectural Improvements
 
 - Expanded settings model with automatic persistence.  
 - Two-way bound view models to ensure synchronization between UI and configuration.  
@@ -72,7 +74,7 @@ The Options window has been resized and reorganized to support these additions w
 - Refactored components for improved maintainability and long-term extensibility.  
 
 
-## Usage
+## 📌 Usage
 
 Launch the executable and trigger hints using the configured hotkeys.  
 
