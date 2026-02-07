@@ -15,7 +15,7 @@ The original Hunt-and-Peck application provides Vim-style keyboard navigation fo
 ![Explorer Screenshot](assets/explorer.png)
 
 <details>
-<summary>Key Enhancements</summary>
+<summary>**🔧 KEY ENHANCEMENTS**</summary>
 
 ### 🔧 Performance Optimization
 
