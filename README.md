@@ -14,9 +14,8 @@ The original Hunt-and-Peck application provides Vim-style keyboard navigation fo
 
 ![Explorer Screenshot](assets/explorer.png)
 
-
-## Key Enhancements
-
+<details>
+<summary>Key Enhancements</summary>
 
 ### 🔧 Performance Optimization
 
@@ -28,6 +27,7 @@ The original Hunt-and-Peck application provides Vim-style keyboard navigation fo
 
 **Outcome:** Faster overlay rendering and more reliable hint activation.
 
+---
 
 ### 🔎 Improved Hint Matching 
 
@@ -37,6 +37,7 @@ The original Hunt-and-Peck application provides Vim-style keyboard navigation fo
 
 **Outcome:** Immediate and predictable hint execution.
 
+---
 
 ### 🔑 Configurable Hotkeys
 
@@ -50,12 +51,13 @@ Users can define:
 
 Settings are loaded dynamically and persist automatically.
 
+---
 
 ### ⚙️ Expanded Appearance and Settings System
 
 A redesigned configuration infrastructure allows comprehensive personalization without code changes.  
 
-**⚙️ Configurable options include:**
+**Configurable options include:**
 
 - Font family and size  
 - Active and inactive background colors  
@@ -65,6 +67,7 @@ A redesigned configuration infrastructure allows comprehensive personalization w
 
 The Options window has been resized and reorganized to support these additions with a clearer layout.
 
+---
 
 ### ⚙️ Architectural Improvements
 
@@ -73,6 +76,7 @@ The Options window has been resized and reorganized to support these additions w
 - Added Win32 validation methods to confirm window handle integrity.  
 - Refactored components for improved maintainability and long-term extensibility.  
 
+</details>
 
 ## 📌 Usage
 
