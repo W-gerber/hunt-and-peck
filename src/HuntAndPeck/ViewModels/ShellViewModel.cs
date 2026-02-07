@@ -32,16 +32,24 @@ namespace HuntAndPeck.ViewModels
             _hintProviderService = hintProviderService;
             _debugHintProviderService = debugHintProviderService;
 
+            // Read main hotkey from settings
+            var mainKey = (Keys)Enum.Parse(typeof(Keys), Properties.Settings.Default.MainHotKeyKey);
+            var mainModifier = (KeyModifier)Enum.Parse(typeof(KeyModifier), Properties.Settings.Default.MainHotKeyModifier);
+            
             keyListener1.HotKey = new HotKey
             {
-                Keys = Keys.OemSemicolon,
-                Modifier = KeyModifier.Alt
+                Keys = mainKey,
+                Modifier = mainModifier
             };
 
+            // Read taskbar hotkey from settings
+            var taskbarKey = (Keys)Enum.Parse(typeof(Keys), Properties.Settings.Default.TaskbarHotKeyKey);
+            var taskbarModifier = (KeyModifier)Enum.Parse(typeof(KeyModifier), Properties.Settings.Default.TaskbarHotKeyModifier);
+            
             keyListener1.TaskbarHotKey = new HotKey
             {
-                Keys = Keys.OemSemicolon,
-                Modifier = KeyModifier.Control
+                Keys = taskbarKey,
+                Modifier = taskbarModifier
             };
 
 #if DEBUG

@@ -1,7 +1,7 @@
 ﻿<Window x:Class="HuntAndPeck.Views.OptionsView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="OptionsView" Height="300" Width="300"
+        Title="OptionsView" Height="500" Width="400"
         WindowStartupLocation="CenterScreen">
     <TabControl TabStripPlacement="Left">
         <TabItem Header="Overlay">
@@ -15,36 +15,338 @@
         </TabItem>
         <TabItem Header="Keyboard">
             <TabItem.Content>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                </Grid>
+                <StackPanel Margin="10">
+                    <Label Content="Main Hotkey" FontWeight="Bold" />
+                    <Label Content="Key" />
+                    <ComboBox SelectedValue="{Binding MainHotKeyKey}" SelectedValuePath="Content" Margin="0,0,0,5">
+                        <ComboBoxItem>A</ComboBoxItem>
+                        <ComboBoxItem>B</ComboBoxItem>
+                        <ComboBoxItem>C</ComboBoxItem>
+                        <ComboBoxItem>D</ComboBoxItem>
+                        <ComboBoxItem>E</ComboBoxItem>
+                        <ComboBoxItem>F</ComboBoxItem>
+                        <ComboBoxItem>G</ComboBoxItem>
+                        <ComboBoxItem>H</ComboBoxItem>
+                        <ComboBoxItem>I</ComboBoxItem>
+                        <ComboBoxItem>J</ComboBoxItem>
+                        <ComboBoxItem>K</ComboBoxItem>
+                        <ComboBoxItem>L</ComboBoxItem>
+                        <ComboBoxItem>M</ComboBoxItem>
+                        <ComboBoxItem>N</ComboBoxItem>
+                        <ComboBoxItem>O</ComboBoxItem>
+                        <ComboBoxItem>P</ComboBoxItem>
+                        <ComboBoxItem>Q</ComboBoxItem>
+                        <ComboBoxItem>R</ComboBoxItem>
+                        <ComboBoxItem>S</ComboBoxItem>
+                        <ComboBoxItem>T</ComboBoxItem>
+                        <ComboBoxItem>U</ComboBoxItem>
+                        <ComboBoxItem>V</ComboBoxItem>
+                        <ComboBoxItem>W</ComboBoxItem>
+                        <ComboBoxItem>X</ComboBoxItem>
+                        <ComboBoxItem>Y</ComboBoxItem>
+                        <ComboBoxItem>Z</ComboBoxItem>
+                        <ComboBoxItem>OemSemicolon</ComboBoxItem>
+                    </ComboBox>
+                    <Label Content="Modifier" />
+                    <ComboBox SelectedValue="{Binding MainHotKeyModifier}" SelectedValuePath="Content" Margin="0,0,0,15">
+                        <ComboBoxItem>Alt</ComboBoxItem>
+                        <ComboBoxItem>Control</ComboBoxItem>
+                        <ComboBoxItem>Shift</ComboBoxItem>
+                    </ComboBox>
+                    
+                    <Label Content="Taskbar/Tray Hotkey" FontWeight="Bold" />
+                    <Label Content="Key" />
+                    <ComboBox SelectedValue="{Binding TaskbarHotKeyKey}" SelectedValuePath="Content" Margin="0,0,0,5">
+                        <ComboBoxItem>A</ComboBoxItem>
+                        <ComboBoxItem>B</ComboBoxItem>
+                        <ComboBoxItem>C</ComboBoxItem>
+                        <ComboBoxItem>D</ComboBoxItem>
+                        <ComboBoxItem>E</ComboBoxItem>
+                        <ComboBoxItem>F</ComboBoxItem>
+                        <ComboBoxItem>G</ComboBoxItem>
+                        <ComboBoxItem>H</ComboBoxItem>
+                        <ComboBoxItem>I</ComboBoxItem>
+                        <ComboBoxItem>J</ComboBoxItem>
+                        <ComboBoxItem>K</ComboBoxItem>
+                        <ComboBoxItem>L</ComboBoxItem>
+                        <ComboBoxItem>M</ComboBoxItem>
+                        <ComboBoxItem>N</ComboBoxItem>
+                        <ComboBoxItem>O</ComboBoxItem>
+                        <ComboBoxItem>P</ComboBoxItem>
+                        <ComboBoxItem>Q</ComboBoxItem>
+                        <ComboBoxItem>R</ComboBoxItem>
+                        <ComboBoxItem>S</ComboBoxItem>
+                        <ComboBoxItem>T</ComboBoxItem>
+                        <ComboBoxItem>U</ComboBoxItem>
+                        <ComboBoxItem>V</ComboBoxItem>
+                        <ComboBoxItem>W</ComboBoxItem>
+                        <ComboBoxItem>X</ComboBoxItem>
+                        <ComboBoxItem>Y</ComboBoxItem>
+                        <ComboBoxItem>Z</ComboBoxItem>
+                        <ComboBoxItem>OemSemicolon</ComboBoxItem>
+                    </ComboBox>
+                    <Label Content="Modifier" />
+                    <ComboBox SelectedValue="{Binding TaskbarHotKeyModifier}" SelectedValuePath="Content" Margin="0,0,0,10">
+                        <ComboBoxItem>Alt</ComboBoxItem>
+                        <ComboBoxItem>Control</ComboBoxItem>
+                        <ComboBoxItem>Shift</ComboBoxItem>
+                    </ComboBox>
+                    
+                    <TextBlock TextWrapping="Wrap" Foreground="Gray" FontSize="10" Margin="0,10,0,0">
+                        Note: Restart Hunt and Peck for hotkey changes to take effect.
+                    </TextBlock>
+                </StackPanel>
             </TabItem.Content>
         </TabItem>
-        <TabItem Header="FontSize">
+        <TabItem Header="Appearance">
             <TabItem.Content>
-                <StackPanel>
+                <StackPanel Margin="10">
                     <Label Content="Font Size" />
-                    <ComboBox SelectedValue="{Binding FontSize}" SelectedValuePath="Content">
+                    <ComboBox SelectedValue="{Binding FontSize}" SelectedValuePath="Content" Margin="0,0,0,10">
                         <ComboBoxItem>8</ComboBoxItem>
+                        <ComboBoxItem>8.5</ComboBoxItem>
                         <ComboBoxItem>9</ComboBoxItem>
+                        <ComboBoxItem>9.5</ComboBoxItem>
                         <ComboBoxItem>10</ComboBoxItem>
+                        <ComboBoxItem>10.5</ComboBoxItem>
                         <ComboBoxItem>11</ComboBoxItem>
+                        <ComboBoxItem>11.5</ComboBoxItem>
                         <ComboBoxItem>12</ComboBoxItem>
+                        <ComboBoxItem>12.5</ComboBoxItem>
                         <ComboBoxItem>13</ComboBoxItem>
+                        <ComboBoxItem>13.5</ComboBoxItem>
                         <ComboBoxItem>14</ComboBoxItem>
+                        <ComboBoxItem>14.5</ComboBoxItem>
                         <ComboBoxItem>15</ComboBoxItem>
+                        <ComboBoxItem>15.5</ComboBoxItem>
                         <ComboBoxItem>16</ComboBoxItem>
+                        <ComboBoxItem>16.5</ComboBoxItem>
                         <ComboBoxItem>17</ComboBoxItem>
+                        <ComboBoxItem>17.5</ComboBoxItem>
                         <ComboBoxItem>18</ComboBoxItem>
+                        <ComboBoxItem>18.5</ComboBoxItem>
                         <ComboBoxItem>19</ComboBoxItem>
+                        <ComboBoxItem>19.5</ComboBoxItem>
                         <ComboBoxItem>20</ComboBoxItem>
+                        <ComboBoxItem>20.5</ComboBoxItem>
                         <ComboBoxItem>21</ComboBoxItem>
+                        <ComboBoxItem>21.5</ComboBoxItem>
                         <ComboBoxItem>22</ComboBoxItem>
+                        <ComboBoxItem>22.5</ComboBoxItem>
                         <ComboBoxItem>23</ComboBoxItem>
+                        <ComboBoxItem>23.5</ComboBoxItem>
                         <ComboBoxItem>24</ComboBoxItem>
                     </ComboBox>
+                    
+                    <Label Content="Font Family" />
+                    <ComboBox SelectedValue="{Binding FontFamily}" SelectedValuePath="Content" Margin="0,0,0,10">
+                        <ComboBoxItem>Arial</ComboBoxItem>
+                        <ComboBoxItem>Calibri</ComboBoxItem>
+                        <ComboBoxItem>Consolas</ComboBoxItem>
+                        <ComboBoxItem>Courier New</ComboBoxItem>
+                        <ComboBoxItem>Georgia</ComboBoxItem>
+                        <ComboBoxItem>Helvetica</ComboBoxItem>
+                        <ComboBoxItem>Segoe UI</ComboBoxItem>
+                        <ComboBoxItem>Tahoma</ComboBoxItem>
+                        <ComboBoxItem>Times New Roman</ComboBoxItem>
+                        <ComboBoxItem>Verdana</ComboBoxItem>
+                    </ComboBox>
+                    
+                    <Label Content="Background Color (Active)" />
+                    <ComboBox SelectedValue="{Binding BackgroundColor}" SelectedValuePath="Tag" Margin="0,0,0,10">
+                        <ComboBoxItem Tag="#F9CD33">
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Width="20" Height="20" Fill="#F9CD33" Stroke="Black" StrokeThickness="1" Margin="0,0,5,0"/>
+                                <TextBlock Text="Gold (Default)" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </ComboBoxItem>
+                        <ComboBoxItem Tag="Yellow">
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Width="20" Height="20" Fill="Yellow" Stroke="Black" StrokeThickness="1" Margin="0,0,5,0"/>
+                                <TextBlock Text="Yellow" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </ComboBoxItem>
+                        <ComboBoxItem Tag="Orange">
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Width="20" Height="20" Fill="Orange" Stroke="Black" StrokeThickness="1" Margin="0,0,5,0"/>
+                                <TextBlock Text="Orange" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </ComboBoxItem>
+                        <ComboBoxItem Tag="#90EE90">
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Width="20" Height="20" Fill="#90EE90" Stroke="Black" StrokeThickness="1" Margin="0,0,5,0"/>
+                                <TextBlock Text="Light Green" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </ComboBoxItem>
+                        <ComboBoxItem Tag="#87CEEB">
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Width="20" Height="20" Fill="#87CEEB" Stroke="Black" StrokeThickness="1" Margin="0,0,5,0"/>
+                                <TextBlock Text="Sky Blue" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </ComboBoxItem>
+                        <ComboBoxItem Tag="#FFB6C1">
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Width="20" Height="20" Fill="#FFB6C1" Stroke="Black" StrokeThickness="1" Margin="0,0,5,0"/>
+                                <TextBlock Text="Light Pink" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </ComboBoxItem>
+                        <ComboBoxItem Tag="#DDA0DD">
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Width="20" Height="20" Fill="#DDA0DD" Stroke="Black" StrokeThickness="1" Margin="0,0,5,0"/>
+                                <TextBlock Text="Plum" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </ComboBoxItem>
+                        <ComboBoxItem Tag="Red">
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Width="20" Height="20" Fill="Red" Stroke="Black" StrokeThickness="1" Margin="0,0,5,0"/>
+                                <TextBlock Text="Red" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </ComboBoxItem>
+                        <ComboBoxItem Tag="#FF6347">
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Width="20" Height="20" Fill="#FF6347" Stroke="Black" StrokeThickness="1" Margin="0,0,5,0"/>
+                                <TextBlock Text="Tomato" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </ComboBoxItem>
+                        <ComboBoxItem Tag="Lime">
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Width="20" Height="20" Fill="Lime" Stroke="Black" StrokeThickness="1" Margin="0,0,5,0"/>
+                                <TextBlock Text="Lime" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </ComboBoxItem>
+                    </ComboBox>
+                    
+                    <Label Content="Background Color (Inactive)" />
+                    <ComboBox SelectedValue="{Binding InactiveBackgroundColor}" SelectedValuePath="Tag" Margin="0,0,0,10">
+                        <ComboBoxItem Tag="#E6C030">
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Width="20" Height="20" Fill="#E6C030" Stroke="Black" StrokeThickness="1" Margin="0,0,5,0"/>
+                                <TextBlock Text="Dark Gold (Default)" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </ComboBoxItem>
+                        <ComboBoxItem Tag="#FFFFE0">
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Width="20" Height="20" Fill="#FFFFE0" Stroke="Black" StrokeThickness="1" Margin="0,0,5,0"/>
+                                <TextBlock Text="Light Yellow" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </ComboBoxItem>
+                        <ComboBoxItem Tag="#FFE4B5">
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Width="20" Height="20" Fill="#FFE4B5" Stroke="Black" StrokeThickness="1" Margin="0,0,5,0"/>
+                                <TextBlock Text="Moccasin" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </ComboBoxItem>
+                        <ComboBoxItem Tag="#98FB98">
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Width="20" Height="20" Fill="#98FB98" Stroke="Black" StrokeThickness="1" Margin="0,0,5,0"/>
+                                <TextBlock Text="Pale Green" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </ComboBoxItem>
+                        <ComboBoxItem Tag="#ADD8E6">
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Width="20" Height="20" Fill="#ADD8E6" Stroke="Black" StrokeThickness="1" Margin="0,0,5,0"/>
+                                <TextBlock Text="Light Blue" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </ComboBoxItem>
+                        <ComboBoxItem Tag="#FFC0CB">
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Width="20" Height="20" Fill="#FFC0CB" Stroke="Black" StrokeThickness="1" Margin="0,0,5,0"/>
+                                <TextBlock Text="Pink" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </ComboBoxItem>
+                        <ComboBoxItem Tag="#E6E6FA">
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Width="20" Height="20" Fill="#E6E6FA" Stroke="Black" StrokeThickness="1" Margin="0,0,5,0"/>
+                                <TextBlock Text="Lavender" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </ComboBoxItem>
+                        <ComboBoxItem Tag="#F08080">
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Width="20" Height="20" Fill="#F08080" Stroke="Black" StrokeThickness="1" Margin="0,0,5,0"/>
+                                <TextBlock Text="Light Coral" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </ComboBoxItem>
+                        <ComboBoxItem Tag="#FFD700">
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Width="20" Height="20" Fill="#FFD700" Stroke="Black" StrokeThickness="1" Margin="0,0,5,0"/>
+                                <TextBlock Text="Gold" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </ComboBoxItem>
+                        <ComboBoxItem Tag="#D3D3D3">
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Width="20" Height="20" Fill="#D3D3D3" Stroke="Black" StrokeThickness="1" Margin="0,0,5,0"/>
+                                <TextBlock Text="Light Gray" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </ComboBoxItem>
+                    </ComboBox>
+                    
+                    <Label Content="Text Color" />
+                    <ComboBox SelectedValue="{Binding TextColor}" SelectedValuePath="Tag" Margin="0,0,0,10">
+                        <ComboBoxItem Tag="Black">
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Width="20" Height="20" Fill="Black" Stroke="Gray" StrokeThickness="1" Margin="0,0,5,0"/>
+                                <TextBlock Text="Black (Default)" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </ComboBoxItem>
+                        <ComboBoxItem Tag="White">
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Width="20" Height="20" Fill="White" Stroke="Black" StrokeThickness="1" Margin="0,0,5,0"/>
+                                <TextBlock Text="White" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </ComboBoxItem>
+                        <ComboBoxItem Tag="#333333">
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Width="20" Height="20" Fill="#333333" Stroke="Gray" StrokeThickness="1" Margin="0,0,5,0"/>
+                                <TextBlock Text="Dark Gray" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </ComboBoxItem>
+                        <ComboBoxItem Tag="Red">
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Width="20" Height="20" Fill="Red" Stroke="Black" StrokeThickness="1" Margin="0,0,5,0"/>
+                                <TextBlock Text="Red" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </ComboBoxItem>
+                        <ComboBoxItem Tag="Blue">
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Width="20" Height="20" Fill="Blue" Stroke="Black" StrokeThickness="1" Margin="0,0,5,0"/>
+                                <TextBlock Text="Blue" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </ComboBoxItem>
+                        <ComboBoxItem Tag="Green">
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Width="20" Height="20" Fill="Green" Stroke="Black" StrokeThickness="1" Margin="0,0,5,0"/>
+                                <TextBlock Text="Green" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </ComboBoxItem>
+                        <ComboBoxItem Tag="Purple">
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Width="20" Height="20" Fill="Purple" Stroke="Black" StrokeThickness="1" Margin="0,0,5,0"/>
+                                <TextBlock Text="Purple" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </ComboBoxItem>
+                        <ComboBoxItem Tag="Orange">
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Width="20" Height="20" Fill="Orange" Stroke="Black" StrokeThickness="1" Margin="0,0,5,0"/>
+                                <TextBlock Text="Orange" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </ComboBoxItem>
+                        <ComboBoxItem Tag="Brown">
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Width="20" Height="20" Fill="Brown" Stroke="Black" StrokeThickness="1" Margin="0,0,5,0"/>
+                                <TextBlock Text="Brown" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </ComboBoxItem>
+                        <ComboBoxItem Tag="Navy">
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Width="20" Height="20" Fill="Navy" Stroke="Gray" StrokeThickness="1" Margin="0,0,5,0"/>
+                                <TextBlock Text="Navy" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </ComboBoxItem>
+                    </ComboBox>
+                    
+                    <TextBlock TextWrapping="Wrap" Foreground="Gray" FontSize="10" Margin="0,10,0,0">
+                        Select a color from the dropdown to see a preview
+                    </TextBlock>
                 </StackPanel>
             </TabItem.Content>
         </TabItem>

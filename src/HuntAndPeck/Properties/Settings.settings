@@ -7,5 +7,29 @@
     <Setting Name="FontSize" Type="System.String" Scope="User">
       <Value Profile="(Default)">14</Value>
     </Setting>
+    <Setting Name="FontFamily" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Arial</Value>
+    </Setting>
+    <Setting Name="BackgroundColor" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#F9CD33</Value>
+    </Setting>
+    <Setting Name="InactiveBackgroundColor" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#E6C030</Value>
+    </Setting>
+    <Setting Name="TextColor" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Black</Value>
+    </Setting>
+    <Setting Name="MainHotKeyKey" Type="System.String" Scope="User">
+      <Value Profile="(Default)">F</Value>
+    </Setting>
+    <Setting Name="MainHotKeyModifier" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Control</Value>
+    </Setting>
+    <Setting Name="TaskbarHotKeyKey" Type="System.String" Scope="User">
+      <Value Profile="(Default)">OemSemicolon</Value>
+    </Setting>
+    <Setting Name="TaskbarHotKeyModifier" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Control</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

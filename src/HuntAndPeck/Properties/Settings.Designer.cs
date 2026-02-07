@@ -35,5 +35,101 @@ namespace HuntAndPeck.Properties {
         }
     }
 
+    [global::System.Configuration.UserScopedSettingAttribute()]
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [global::System.Configuration.DefaultSettingValueAttribute("Arial")]
+    public string FontFamily {
+        get {
+            return ((string)(this["FontFamily"]));
+        }
+        set {
+            this["FontFamily"] = value;
+        }
+    }
+
+    [global::System.Configuration.UserScopedSettingAttribute()]
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [global::System.Configuration.DefaultSettingValueAttribute("#F9CD33")]
+    public string BackgroundColor {
+        get {
+            return ((string)(this["BackgroundColor"]));
+        }
+        set {
+            this["BackgroundColor"] = value;
+        }
+    }
+
+    [global::System.Configuration.UserScopedSettingAttribute()]
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [global::System.Configuration.DefaultSettingValueAttribute("#E6C030")]
+    public string InactiveBackgroundColor {
+        get {
+            return ((string)(this["InactiveBackgroundColor"]));
+        }
+        set {
+            this["InactiveBackgroundColor"] = value;
+        }
+    }
+
+    [global::System.Configuration.UserScopedSettingAttribute()]
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [global::System.Configuration.DefaultSettingValueAttribute("Black")]
+    public string TextColor {
+        get {
+            return ((string)(this["TextColor"]));
+        }
+        set {
+            this["TextColor"] = value;
+        }
+    }
+
+    [global::System.Configuration.UserScopedSettingAttribute()]
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [global::System.Configuration.DefaultSettingValueAttribute("F")]
+    public string MainHotKeyKey {
+        get {
+            return ((string)(this["MainHotKeyKey"]));
+        }
+        set {
+            this["MainHotKeyKey"] = value;
+        }
+    }
+
+    [global::System.Configuration.UserScopedSettingAttribute()]
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [global::System.Configuration.DefaultSettingValueAttribute("Control")]
+    public string MainHotKeyModifier {
+        get {
+            return ((string)(this["MainHotKeyModifier"]));
+        }
+        set {
+            this["MainHotKeyModifier"] = value;
+        }
+    }
+
+    [global::System.Configuration.UserScopedSettingAttribute()]
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [global::System.Configuration.DefaultSettingValueAttribute("OemSemicolon")]
+    public string TaskbarHotKeyKey {
+        get {
+            return ((string)(this["TaskbarHotKeyKey"]));
+        }
+        set {
+            this["TaskbarHotKeyKey"] = value;
+        }
+    }
+
+    [global::System.Configuration.UserScopedSettingAttribute()]
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    [global::System.Configuration.DefaultSettingValueAttribute("Control")]
+    public string TaskbarHotKeyModifier {
+        get {
+            return ((string)(this["TaskbarHotKeyModifier"]));
+        }
+        set {
+            this["TaskbarHotKeyModifier"] = value;
+        }
+    }
+
     }
 }

@@ -3,9 +3,11 @@ using HuntAndPeck.Models;
 using HuntAndPeck.NativeMethods;
 using HuntAndPeck.Services.Interfaces;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using UIAutomationClient;
 
@@ -14,6 +16,15 @@ namespace HuntAndPeck.Services
     internal class UiAutomationHintProviderService : IHintProviderService, IDebugHintProviderService
     {
         private readonly IUIAutomation _automation = new CUIAutomation();
+        private static readonly ConcurrentDictionary<IntPtr, CachedWindowElements> _elementCache = new ConcurrentDictionary<IntPtr, CachedWindowElements>();
+        private static readonly object _cacheLock = new object();
+
+        private class CachedWindowElements
+        {
+            public List<IUIAutomationElement> Elements { get; set; }
+            public DateTime LastAccessed { get; set; }
+            public int ProcessId { get; set; }
+        }
 
         public HintSession EnumHints()
         {
@@ -59,40 +70,137 @@ namespace HuntAndPeck.Services
         /// <returns>A hint session</returns>
         private HintSession EnumWindowHints(IntPtr hWnd, Func<IntPtr, Rect, IUIAutomationElement, Hint> hintFactory)
         {
-            var result = new List<Hint>();
-            var elements = EnumElements(hWnd);
+            var result = new ConcurrentBag<Hint>();
+            var elements = GetCachedOrEnumElements(hWnd);
 
             // Window bounds
             var rawWindowBounds = new RECT();
             User32.GetWindowRect(hWnd, ref rawWindowBounds);
             Rect windowBounds = rawWindowBounds;
 
-            foreach (var element in elements)
+            // Use parallel processing for better performance
+            Parallel.ForEach(elements, (element) =>
             {
-                var boundingRectObject = element.CurrentBoundingRectangle;
-                if ((boundingRectObject.right > boundingRectObject.left) && (boundingRectObject.bottom > boundingRectObject.top))
+                try
                 {
-                    var niceRect = new Rect(new Point(boundingRectObject.left, boundingRectObject.top), new Point(boundingRectObject.right, boundingRectObject.bottom));
-                    // Convert the bounding rect to logical coords
-                    var logicalRect = niceRect.PhysicalToLogicalRect(hWnd);
-                    if (!logicalRect.IsEmpty)
+                    var boundingRectObject = element.CurrentBoundingRectangle;
+                    if ((boundingRectObject.right > boundingRectObject.left) && (boundingRectObject.bottom > boundingRectObject.top))
                     {
-                        var windowCoords = niceRect.ScreenToWindowCoordinates(windowBounds);
-                        var hint = hintFactory(hWnd, windowCoords, element);
-                        if (hint != null)
+                        var niceRect = new Rect(new Point(boundingRectObject.left, boundingRectObject.top), new Point(boundingRectObject.right, boundingRectObject.bottom));
+                        // Convert the bounding rect to logical coords
+                        var logicalRect = niceRect.PhysicalToLogicalRect(hWnd);
+                        if (!logicalRect.IsEmpty)
                         {
-                            result.Add(hint);
+                            var windowCoords = niceRect.ScreenToWindowCoordinates(windowBounds);
+                            var hint = hintFactory(hWnd, windowCoords, element);
+                            if (hint != null)
+                            {
+                                result.Add(hint);
+                            }
                         }
                     }
                 }
-            }
+                catch (Exception)
+                {
+                    // Element may have been destroyed during enumeration
+                }
+            });
 
             return new HintSession
             {
-                Hints = result,
+                Hints = result.ToList(),
                 OwningWindow = hWnd,
                 OwningWindowBounds = windowBounds,
             };
+        }
+
+        /// <summary>
+        /// Gets cached elements or enumerates new ones if cache is invalid
+        /// </summary>
+        /// <param name="hWnd">The window handle</param>
+        /// <returns>List of automation elements</returns>
+        private List<IUIAutomationElement> GetCachedOrEnumElements(IntPtr hWnd)
+        {
+            // Check if window still exists
+            if (!User32.IsWindow(hWnd))
+            {
+                CleanupCacheForWindow(hWnd);
+                return new List<IUIAutomationElement>();
+            }
+
+            // Get process ID for the window
+            User32.GetWindowThreadProcessId(hWnd, out int processId);
+
+            // Try to get from cache
+            if (_elementCache.TryGetValue(hWnd, out var cachedData))
+            {
+                // Verify the process is still alive
+                try
+                {
+                    var process = Process.GetProcessById(cachedData.ProcessId);
+                    if (!process.HasExited)
+                    {
+                        cachedData.LastAccessed = DateTime.UtcNow;
+                        return cachedData.Elements;
+                    }
+                }
+                catch
+                {
+                    // Process no longer exists
+                }
+
+                // Cache is invalid, remove it
+                CleanupCacheForWindow(hWnd);
+            }
+
+            // Enumerate new elements and cache them
+            var elements = EnumElements(hWnd);
+            
+            var newCache = new CachedWindowElements
+            {
+                Elements = elements,
+                LastAccessed = DateTime.UtcNow,
+                ProcessId = processId
+            };
+
+            _elementCache.TryAdd(hWnd, newCache);
+
+            // Clean up old cache entries (older than 5 minutes or for closed windows)
+            CleanupStaleCache();
+
+            return elements;
+        }
+
+        /// <summary>
+        /// Removes cache entry for a specific window
+        /// </summary>
+        /// <param name="hWnd">The window handle</param>
+        private void CleanupCacheForWindow(IntPtr hWnd)
+        {
+            _elementCache.TryRemove(hWnd, out _);
+        }
+
+        /// <summary>
+        /// Cleans up stale cache entries
+        /// </summary>
+        private void CleanupStaleCache()
+        {
+            var staleThreshold = DateTime.UtcNow.AddMinutes(-5);
+            var keysToRemove = new List<IntPtr>();
+
+            foreach (var kvp in _elementCache)
+            {
+                // Remove if last accessed more than 5 minutes ago or window no longer exists
+                if (kvp.Value.LastAccessed < staleThreshold || !User32.IsWindow(kvp.Key))
+                {
+                    keysToRemove.Add(kvp.Key);
+                }
+            }
+
+            foreach (var key in keysToRemove)
+            {
+                _elementCache.TryRemove(key, out _);
+            }
         }
 
         /// <summary>

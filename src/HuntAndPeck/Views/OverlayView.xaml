@@ -12,13 +12,9 @@
     Loaded="OverlayView_OnLoaded"
     PreviewKeyDown="OverlayView_OnPreviewKeyDown">
     <local:ForegroundWindow.Resources>
-        <Style x:Key="HintStyle" TargetType="TextBlock">
-            <Setter Property="Background" Value="Yellow" />
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding Active}" Value="false">
-                    <Setter Property="Background" Value="LightYellow" />
-                </DataTrigger>
-            </Style.Triggers>
+        <Style x:Key="HintBorderStyle" TargetType="Border">
+            <Setter Property="Padding" Value="7 3" />
+            <Setter Property="CornerRadius" Value="4" />
         </Style>
     </local:ForegroundWindow.Resources>
     <local:ForegroundWindow.Background>
@@ -49,8 +45,54 @@
                             </Rectangle.Fill>
                         </Rectangle>-->
                         <Viewbox StretchDirection="DownOnly" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1 1 0 0" Width="{Binding Hint.BoundingRectangle.Width}" Height="{Binding Hint.BoundingRectangle.Height}">
-                            <TextBlock Text="{Binding Label}" FontFamily="Helvetica, Arial" FontWeight="Bold" FontSize="{Binding FontSizeReadValue}" Style="{StaticResource HintStyle}">
-                            </TextBlock>
+                            <Border Padding="4 1" CornerRadius="3" BorderThickness="1">
+                                <Border.Style>
+                                    <Style TargetType="Border">
+                                        <Setter Property="Background">
+                                            <Setter.Value>
+                                                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                                    <GradientStop Color="#FFFEF5" Offset="0"/>
+                                                    <GradientStop Color="#FFE44D" Offset="0.3"/>
+                                                    <GradientStop Color="#F5D033" Offset="0.7"/>
+                                                    <GradientStop Color="#E8C028" Offset="1"/>
+                                                </LinearGradientBrush>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Setter Property="BorderBrush">
+                                            <Setter.Value>
+                                                <SolidColorBrush Color="#C9A825" />
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Active}" Value="false">
+                                                <Setter Property="Background">
+                                                    <Setter.Value>
+                                                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                                            <GradientStop Color="#F5F3E8" Offset="0"/>
+                                                            <GradientStop Color="#EDDA3F" Offset="0.3"/>
+                                                            <GradientStop Color="#E0C230" Offset="0.7"/>
+                                                            <GradientStop Color="#D4B022" Offset="1"/>
+                                                        </LinearGradientBrush>
+                                                    </Setter.Value>
+                                                </Setter>
+                                                <Setter Property="BorderBrush">
+                                                    <Setter.Value>
+                                                        <SolidColorBrush Color="#B89920" />
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+                                <TextBlock Text="{Binding Label}" FontFamily="{Binding FontFamilyReadValue}" FontWeight="Bold" FontSize="{Binding FontSizeReadValue}" RenderOptions.ClearTypeHint="Enabled" TextOptions.TextRenderingMode="ClearType">
+                                    <TextBlock.Foreground>
+                                        <SolidColorBrush Color="{Binding TextColorReadValue}" />
+                                    </TextBlock.Foreground>
+                                    <TextBlock.Effect>
+                                        <DropShadowEffect Color="#50000000" BlurRadius="0.8" ShadowDepth="0.3" Opacity="0.5" Direction="270" RenderingBias="Quality"/>
+                                    </TextBlock.Effect>
+                                </TextBlock>
+                            </Border>
                         </Viewbox>
                     </Grid>
                 </DataTemplate>

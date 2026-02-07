@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 using HuntAndPeck.Models;
@@ -11,6 +12,7 @@ namespace HuntAndPeck.ViewModels
     {
         private Rect _bounds;
         private ObservableCollection<HintViewModel> _hints = new ObservableCollection<HintViewModel>();
+        private Dictionary<string, List<HintViewModel>> _hintLookup = new Dictionary<string, List<HintViewModel>>(StringComparer.OrdinalIgnoreCase);
 
         public OverlayViewModel(
             HintSession session,
@@ -22,11 +24,23 @@ namespace HuntAndPeck.ViewModels
             for (int i = 0; i < labels.Count; ++i)
             {
                 var hint = session.Hints[i];
-                _hints.Add(new HintViewModel(hint)
+                var hintViewModel = new HintViewModel(hint)
                 {
                     Label = labels[i],
                     Active = false
-                });
+                };
+                _hints.Add(hintViewModel);
+
+                // Build lookup dictionary for faster matching
+                for (int j = 1; j <= labels[i].Length; j++)
+                {
+                    var prefix = labels[i].Substring(0, j).ToUpperInvariant();
+                    if (!_hintLookup.ContainsKey(prefix))
+                    {
+                        _hintLookup[prefix] = new List<HintViewModel>();
+                    }
+                    _hintLookup[prefix].Add(hintViewModel);
+                }
             }
         }
 
@@ -65,21 +79,47 @@ namespace HuntAndPeck.ViewModels
         {
             set
             {
-                foreach (var x in Hints)
+                if (string.IsNullOrEmpty(value))
                 {
-                    x.Active = false;
+                    // Reset all hints to inactive
+                    foreach (var x in Hints)
+                    {
+                        x.Active = false;
+                    }
+                    return;
                 }
 
-                var matching = Hints.Where(x => x.Label.StartsWith(value, StringComparison.OrdinalIgnoreCase)).ToArray();
-                foreach (var x in matching)
+                var upperValue = value.ToUpperInvariant();
+                
+                // Use lookup dictionary for O(1) access instead of O(n) search
+                if (_hintLookup.TryGetValue(upperValue, out var matching))
                 {
-                    x.Active = true;
-                }
+                    // Deactivate all hints first
+                    foreach (var x in Hints)
+                    {
+                        x.Active = false;
+                    }
 
-                if (matching.Count() == 1)
+                    // Activate only matching hints
+                    foreach (var x in matching)
+                    {
+                        x.Active = true;
+                    }
+
+                    // If exactly one match, invoke it
+                    if (matching.Count == 1)
+                    {
+                        matching[0].Hint.Invoke();
+                        CloseOverlay?.Invoke();
+                    }
+                }
+                else
                 {
-                    matching.First().Hint.Invoke();
-                    CloseOverlay?.Invoke();
+                    // No matches, deactivate all
+                    foreach (var x in Hints)
+                    {
+                        x.Active = false;
+                    }
                 }
             }
         }
